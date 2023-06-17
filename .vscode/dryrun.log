@@ -1,0 +1,6 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/Users/dacortes/Desktop/philosophers'
+mkdir  ./src/obj
+ 
+make: Leaving directory '/Users/dacortes/Desktop/philosophers'
+ 

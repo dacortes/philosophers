@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/16 11:03:26 by dacortes          #+#    #+#              #
-#    Updated: 2023/06/16 11:23:55 by dacortes         ###   ########.fr        #
+#    Updated: 2023/06/17 15:22:50 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,10 +68,15 @@ all: dir $(NAME)
 dir:
 	-mkdir  $(D_OBJ)
 $(D_OBJ)/%.o:$(L_SRC)/%.c
-	$(CC) -MMD $(FLAGS) -c $< -o $@ $(INC)
+	$(CC) -MMD $(FLAGS) -c $< -o $@ $(INC) -pthread
 	$(eval CURRENT_FILE := $(shell echo $$(($(CURRENT_FILE) + 1)))) \
 	$(eval PROGRESS_BAR := $(shell awk "BEGIN { printf \"%.0f\", $(CURRENT_FILE)*100/$(TOTAL_FILES) }")) \
-	printf "$B$(ligth)⏳Compiling philo:$E $(ligth)%-30s [%-50s] %d%%\r" "$<..." "$(shell printf '=%.0s' {1..$(shell echo "$(PROGRESS_BAR)/2" | bc)})" $(PROGRESS_BAR)
+	printf "\r$B$(ligth)⏳Compiling libft:$E $(ligth)%-30s [$(CURRENT_FILE)/$(TOTAL_FILES)] [%-50s] %3d%%\033[K" \
+	"$<..." "$(shell printf '$(G)█%.0s$(E)$(ligth)' {1..$(shell echo "$(PROGRESS_BAR)/2" | bc)})" $(PROGRESS_BAR)
+
+	@if [ $(PROGRESS_BAR) = 100 ]; then \
+		echo "$(B) All done$(E)"; \
+	fi
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME) $(INC)
 	echo "\n\n✅ ==== $(B)$(ligth)Project philosophers compiled!$(E) ==== ✅"
