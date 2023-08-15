@@ -7,28 +7,27 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Sat Jun 17 14:24:50 2023
+# Make data base, printed on Tue Aug 15 17:30:57 2023
 
 # Variables
 
-# makefile (from 'Makefile', line 39)
- 
+# makefile (from 'Makefile', line 24)
 OBJ = $(addprefix $(D_OBJ)/, $(SRC:.c=.o))
 # environment
 LC_ALL = C
-# makefile (from 'Makefile', line 29)
-SRC = philo.c
-# makefile (from 'Makefile', line 48)
+# makefile (from 'Makefile', line 17)
+SRC = main.c
+# makefile (from 'Makefile', line 31)
 G = \033[32m
-# makefile (from 'Makefile', line 50)
+# makefile (from 'Makefile', line 33)
 B = \033[34m
-# makefile (from 'Makefile', line 37)
+# makefile (from 'Makefile', line 23)
 D_OBJ = $(L_SRC)/obj
 # environment
 TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000ccy000337h/T/
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.2368
-# makefile (from 'Makefile', line 59)
+XPC_SERVICE_NAME = com.microsoft.VSCode.2408
+# makefile (from 'Makefile', line 40)
 dark = \033[2m
 # environment
 VSCODE_CRASH_REPORTER_PROCESS_TYPE = extensionHost
@@ -55,7 +54,7 @@ MAIL = dacortes@student.42barcelona.com
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/dacortes/Library/Application Support/Code/CachedData/5e805b79fcb6ba4c2d23712967df89a089da575b
+VSCODE_CODE_CACHE_PATH = /Users/dacortes/Library/Application Support/Code/CachedData/74f6148eb9ea00507ec113ec51c489d6ffb4b771
 # environment
 LANG = C
 # default
@@ -66,57 +65,58 @@ LANG = C
 __CF_USER_TEXT_ENCODING = 0x18CF0:0x0:0x0
 # makefile
 MAKEFLAGS = pqrR
-# makefile (from 'Makefile', line 40)
+# makefile (from 'Makefile', line 25)
 DEP = $(addprefix $(D_OBJ)/, $(SRC:.c=.d))
 # makefile
 CURDIR := /Users/dacortes/Desktop/philosophers
-# makefile (from 'Makefile', line 20)
+# makefile (from 'Makefile', line 7)
 LIBC = ar -rcs
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
-# makefile (from 'Makefile', line 23)
+# makefile (from 'Makefile', line 13)
 PROGRESS_BAR := 
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.iKR81ALfjZ/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.8RP32BILdR/Listeners
 # default
 .SHELLFLAGS := -c
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
-# makefile (from 'src/obj/philo.d', line 1)
-MAKEFILE_LIST := Makefile src/obj/philo.d
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
 ZSH = /Users/dacortes/.oh-my-zsh
 # environment
-VSCODE_PID = 876
+VSCODE_PID = 863
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
-# makefile (from 'Makefile', line 21)
+# makefile (from 'Makefile', line 8)
 FLAGS = -Wall -Wextra -Werror 
-# makefile (from 'Makefile', line 46)
+# makefile (from 'Makefile', line 29)
 E = \033[m
 # environment
 MallocNanoZone = 0
 # automatic
 *F = $(notdir $*)
-# makefile (from 'Makefile', line 47)
+# makefile (from 'Makefile', line 30)
 R = \033[31m
-# makefile (from 'Makefile', line 60)
+# makefile (from 'Makefile', line 41)
 italic = \033[3m
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # environment
-VSCODE_NLS_CONFIG = {"locale":"us","availableLanguages":{"*":"es"},"_languagePackId":"ac912362dff4707224d25c1495fac2dc.es","_translationsConfigFile":"/Users/dacortes/Library/Application Support/Code/clp/ac912362dff4707224d25c1495fac2dc.es/tcf.json","_cacheRoot":"/Users/dacortes/Library/Application Support/Code/clp/ac912362dff4707224d25c1495fac2dc.es","_corruptedFile":"/Users/dacortes/Library/Application Support/Code/clp/ac912362dff4707224d25c1495fac2dc.es/corrupted.info","_resolvedLanguagePackCoreLocation":"/Users/dacortes/Library/Application Support/Code/clp/ac912362dff4707224d25c1495fac2dc.es/5e805b79fcb6ba4c2d23712967df89a089da575b","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"es","osLocale":"us","availableLanguages":{"*":"es"},"_languagePackId":"4db3809a663b24d58c00883a9d02ff6f.es","_translationsConfigFile":"/Users/dacortes/Library/Application Support/Code/clp/4db3809a663b24d58c00883a9d02ff6f.es/tcf.json","_cacheRoot":"/Users/dacortes/Library/Application Support/Code/clp/4db3809a663b24d58c00883a9d02ff6f.es","_resolvedLanguagePackCoreLocation":"/Users/dacortes/Library/Application Support/Code/clp/4db3809a663b24d58c00883a9d02ff6f.es/74f6148eb9ea00507ec113ec51c489d6ffb4b771","_corruptedFile":"/Users/dacortes/Library/Application Support/Code/clp/4db3809a663b24d58c00883a9d02ff6f.es/corrupted.info","_languagePackSupport":true}
 # default
 MAKE_HOST := x86_64-apple-darwin19.6.0
-# makefile (from 'Makefile', line 58)
+# makefile (from 'Makefile', line 39)
 ligth = \033[1m
-# makefile (from 'Makefile', line 51)
+ 
+# makefile (from 'Makefile', line 34)
 P = \033[35m
 # makefile
 SHELL = /bin/sh
@@ -129,18 +129,18 @@ MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /goinfre/dacortes/miniconda3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/munki
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/munki:/opt/anaconda3/condabin
 # default
 MAKEFILES := 
 # automatic
 ^F = $(notdir $^)
-# makefile (from 'Makefile', line 30)
+# makefile (from 'Makefile', line 18)
 L_SRC = ./src
 # automatic
 ?F = $(notdir $?)
-# makefile (from 'Makefile', line 31)
+# makefile (from 'Makefile', line 19)
 INC = -I ./inc/ 
-# makefile (from 'Makefile', line 17)
+# makefile (from 'Makefile', line 4)
 NAME = philo
 # environment
 LS_COLORS = di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
@@ -158,32 +158,32 @@ LOGNAME = dacortes
 XPC_FLAGS = 0x0
 # makefile
 .DEFAULT_GOAL := all
-# makefile (from 'Makefile', line 19)
+# makefile (from 'Makefile', line 6)
 RM = rm -rf
 # environment
 USER = dacortes
-# makefile (from 'Makefile', line 22)
+# makefile (from 'Makefile', line 12)
 CURRENT_FILE = 0
 # default
 MAKE_VERSION := 4.4.1
-# makefile (from 'Makefile', line 49)
+# makefile (from 'Makefile', line 32)
 Y = \033[33m
 # environment
 PAGER = less
 # environment
 _ = /usr/bin/make
-# makefile (from 'Makefile', line 52)
+# makefile (from 'Makefile', line 35)
 C = \033[36m
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
-# makefile (from 'Makefile', line 92)
+# makefile (from 'Makefile', line 77)
 TOTAL_FILES := 1
 # environment
 HOME = /Users/dacortes
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /Users/dacortes/Library/Application Support/Code/1.76-main.sock
+VSCODE_IPC_HOOK = /Users/dacortes/Library/Application Support/Code/1.80-main.sock
 # default
 .RECIPEPREFIX := 
 # automatic
@@ -192,10 +192,10 @@ VSCODE_IPC_HOOK = /Users/dacortes/Library/Application Support/Code/1.76-main.soc
 SUFFIXES := 
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs notintermediate shell-export archives jobserver jobserver-fifo output-sync check-symlink load
-# makefile (from 'Makefile', line 18)
+# makefile (from 'Makefile', line 5)
 CC = gcc
 # variable set hash-table stats:
-# Load=91/1024=9%, Rehash=0, Collisions=9/139=6%
+# Load=91/1024=9%, Rehash=0, Collisions=9/137=7%
 
 # Pattern-specific Variable Values
 
@@ -203,28 +203,39 @@ CC = gcc
 
 # Directories
 
-# src (device 16777228, inode 1411045): No files, no impossibilities so far.
-# . (device 16777228, inode 1410433): 8 files, no impossibilities.
+# src (device 16777228, inode 1950941): No files, no impossibilities so far.
+# . (device 16777228, inode 1950870): 8 files, no impossibilities.
 
 # 8 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 src/obj/%.o: src/%.c
-#  recipe to execute (from 'Makefile', line 71):
-	$(CC) -MMD $(FLAGS) -c $< -o $@ $(INC) -pthread
+#  recipe to execute (from 'Makefile', line 52):
+	$(CC) -MMD $(FLAGS) -c $< -o $@ $(INC)
 	$(eval CURRENT_FILE := $(shell echo $$(($(CURRENT_FILE) + 1)))) \
 	$(eval PROGRESS_BAR := $(shell awk "BEGIN { printf \"%.0f\", $(CURRENT_FILE)*100/$(TOTAL_FILES) }")) \
-	printf "$B$(ligth)⏳Compiling philo:$E $(ligth)%-30s %-50s %d%%\r" "$<..." "[$(CURRENT_FILE)/$(TOTAL_FILES)]  $(shell printf '$(G)█%.0s$(E)$(ligth)' {1..$(shell echo "$(PROGRESS_BAR)/2" | bc)})" $(PROGRESS_BAR)
+	printf "\r$B$(ligth)⏳Compiling libft:$E $(ligth)%-30s [$(CURRENT_FILE)/$(TOTAL_FILES)] [%-50s] %3d%%\033[K" \
+	"$<..." "$(shell printf '$(G)█%.0s$(E)$(ligth)' {1..$(shell echo "$(PROGRESS_BAR)/2" | bc)})" $(PROGRESS_BAR)
+	
+	@if [ $(PROGRESS_BAR) = 100 ]; then \
+		echo "$(B) All done$(E)"; \
+	fi
 
 # 1 implicit rules, 0 (0.0%) terminal.
 # Files
 
 # Not a target:
+src/obj/main.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 Makefile:
 #  Implicit rule search has been done.
 #  File is secondary (prerequisite of .SECONDARY).
-#  Last modified 2023-06-17 14:24:30
+#  Last modified 2023-08-15 17:30:46
 #  File has been updated.
 #  Successfully updated.
 
@@ -238,7 +249,7 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 89):
+#  recipe to execute (from 'Makefile', line 74):
 	$(RM) $(D_OBJ)
 	echo "✅ ==== $(P)$(ligth)philo object files cleaned!$(E) ==== ✅"
 
@@ -272,7 +283,7 @@ dir:
 # | := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/13=8%
-#  recipe to execute (from 'Makefile', line 69):
+#  recipe to execute (from 'Makefile', line 50):
 	-mkdir  $(D_OBJ)
 
 # Not a target:
@@ -296,36 +307,25 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 85):
+#  recipe to execute (from 'Makefile', line 70):
 	$(RM) $(NAME)
 	echo "✅ ==== $(P)$(ligth)philo executable files and name cleaned!$(E) ==== ✅\n"
 	
 
 # Not a target:
-src/../inc/philo.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/obj/main.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
 
- 
-src/obj/philo.o: src/philo.c src/../inc/philo.h
+philo: src/obj/main.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-
-# Not a target:
-src/philo.c:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-philo: src/obj/philo.o
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 76):
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME) $(INC)
-	echo "\n\n✅ ==== $(B)$(ligth)Project philosophers compiled!$(E) ==== ✅"
+#  recipe to execute (from 'Makefile', line 62):
+	$(CC) $(FLAGS) $(OBJ) $(L_LIB) $(L_RDL)  -ltermcap -o $(NAME) $(INC)
+	echo "\n\n✅ ==== $(B)$(ligth)Project philo compiled!$(E) ==== ✅"
 
 # Not a target:
 .SUFFIXES:
@@ -338,28 +338,20 @@ philo: src/obj/philo.o
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-src/obj/philo.d:
-#  Implicit rule search has been done.
-#  File is secondary (prerequisite of .SECONDARY).
-#  Last modified 2023-06-17 14:24:33
-#  File has been updated.
-#  Successfully updated.
-
 # files hash-table stats:
-# Load=15/1024=1%, Rehash=0, Collisions=0/46=0%
+# Load=13/1024=1%, Rehash=0, Collisions=0/42=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 24 / storage = 201 B / avg = 8 B
-# current buf: size = 8162 B / used = 201 B / count = 24 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 23 / storage = 179 B / avg = 7 B
+# current buf: size = 8162 B / used = 179 B / count = 23 / avg = 7 B
 
-# strcache performance: lookups = 51 / hit rate = 52%
+# strcache performance: lookups = 47 / hit rate = 51%
 # hash-table stats:
-# Load=24/8192=0%, Rehash=0, Collisions=0/51=0%
-# Finished Make data base on Sat Jun 17 14:24:50 2023
+# Load=23/8192=0%, Rehash=0, Collisions=0/47=0%
+# Finished Make data base on Tue Aug 15 17:30:57 2023
 
  
