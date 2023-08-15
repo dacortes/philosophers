@@ -46,7 +46,6 @@ italic = \033[3m
 all: dir $(NAME)
 -include $(DEP)
 dir:
-#cd $(READL) && ./configure &> /dev/null
 	-mkdir  $(D_OBJ)
 $(D_OBJ)/%.o:$(L_SRC)/%.c
 	$(CC) -MMD $(FLAGS) -c $< -o $@ $(INC)
