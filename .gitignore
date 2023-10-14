@@ -4,5 +4,3 @@
 *.a
 *.vscode
 obj
-philo
-philo.*
