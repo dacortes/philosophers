@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:07:41 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/14 14:43:39 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:34:46 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ struct s_philo
 	int				num;
 	int				tm_die;
 	int				tm_lft_eat;
+	t_box			*bx;
 	pthread_mutex_t	left;
 	pthread_mutex_t	*right;
+	pthread_mutex_t	mt_tm_die;
 };
 /*
 	arr[0] = num_philos arr[1] = tm_to_die
@@ -93,10 +95,19 @@ struct s_box
 /*                            FUNTIONS                                        */
 /******************************************************************************/
 
-/* utils.c */
+/* src/*/
+int	init(t_box *bx, int ac);
+
+/* src/utils.c */
 int	ft_atoi(char *str);
 int	is_digit(char *str);
-/* parce.c */
+int	tm_elapsed(struct timeval start);
+int	tm_sleep(int mllsec, t_box *bx);
+
+/* src/routune.c  */
+void	*start_rn(void *ptr);
+
+/* src/parce.c */
 int	check_av(int ac, char **av);
 int	get_arg(int ac, char **av, int check, int *array);
 #endif
