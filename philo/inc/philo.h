@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:07:41 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/14 12:15:34 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/14 14:43:39 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@
 /******************************************************************************/
 
 /* Outputs */
-# define ERROR -1
+# define NOT	-1
+# define ERROR	-1
 # define FALSE	0
 # define TRUE	1
 /*  Status philo */
@@ -53,17 +54,17 @@
 # define THINK	"\033[1;32mis thinking\033[m"
 # define DIE	"\033[1;31mdied\033[m"
 
-typedef struct s_box	t_box;
-typedef struct s_philo	t_philo;
+typedef struct s_box			t_box;
+typedef struct s_philo			t_philo;
+
 struct s_philo
 {
 	int				num;
 	int				tm_die;
-	int 			tm_lft_eat;
+	int				tm_lft_eat;
 	pthread_mutex_t	left;
 	pthread_mutex_t	*right;
 };
-
 /*
 	arr[0] = num_philos arr[1] = tm_to_die
 	arr[2] = tm_to_eat  arr[3] = tm_to_sleep
@@ -71,7 +72,7 @@ struct s_philo
 */
 struct s_box
 {
-	int				arr[4];
+	int				arr[5];
 	int				n_philo;
 	int				tm_sleep;
 	int				tm_die;
@@ -83,7 +84,7 @@ struct s_box
 	t_philo			*philo;
 	pthread_t		*th;
 	pthread_mutex_t	mt_print;
-	pthread_mutex_t sm_start;
+	pthread_mutex_t	sm_start;
 	pthread_mutex_t	sm_end;
 	pthread_mutex_t	ph_end;
 };
