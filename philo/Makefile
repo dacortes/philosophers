@@ -47,7 +47,7 @@ all: dir $(NAME)
 -include $(DEP)
 dir:
 	-mkdir  $(D_OBJ)
-$(D_OBJ)/%.o:$(L_SRC)/%.c
+$(D_OBJ)/%.o:$(L_SRC)/%.c Makefile
 	$(CC) -MMD $(FLAGS) -c $< -o $@ $(INC)
 	$(eval CURRENT_FILE := $(shell echo $$(($(CURRENT_FILE) + 1)))) \
 	$(eval PROGRESS_BAR := $(shell awk "BEGIN { printf \"%.0f\", $(CURRENT_FILE)*100/$(TOTAL_FILES) }")) \

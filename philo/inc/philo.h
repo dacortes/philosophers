@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:07:41 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/14 11:01:23 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/14 12:15:34 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,52 @@
 /******************************************************************************/
 /*                            UTILS                                           */
 /******************************************************************************/
-/* */
+
+/* Outputs */
 # define ERROR -1
 # define FALSE	0
 # define TRUE	1
+/*  Status philo */
+# define FORK	"\033[1;32mhas taken a fork\033[m"
+# define EAT	"\033[1;33mis eating\033[m"
+# define SLEEP	"\033[38;5;128mis sleeping\033[m"
+# define THINK	"\033[1;32mis thinking\033[m"
+# define DIE	"\033[1;31mdied\033[m"
 
-
-typedef struct s_box
+typedef struct s_box	t_box;
+typedef struct s_philo	t_philo;
+struct s_philo
 {
-	int	array[4];
-}	t_box;
+	int				num;
+	int				tm_die;
+	int 			tm_lft_eat;
+	pthread_mutex_t	left;
+	pthread_mutex_t	*right;
+};
+
+/*
+	arr[0] = num_philos arr[1] = tm_to_die
+	arr[2] = tm_to_eat  arr[3] = tm_to_sleep
+	arr[4] = number_of_times_each_philosopher_must_eat 
+*/
+struct s_box
+{
+	int				arr[4];
+	int				n_philo;
+	int				tm_sleep;
+	int				tm_die;
+	int				tm_eat;
+	int				tm_mt_eat;
+	int				end_of_sm;
+	int				end_of_ph;
+	struct timeval	start;
+	t_philo			*philo;
+	pthread_t		*th;
+	pthread_mutex_t	mt_print;
+	pthread_mutex_t sm_start;
+	pthread_mutex_t	sm_end;
+	pthread_mutex_t	ph_end;
+};
 
 /******************************************************************************/
 /*                            FUNTIONS                                        */

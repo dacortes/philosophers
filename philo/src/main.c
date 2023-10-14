@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:21:05 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/13 15:52:09 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/14 12:03:24 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ int	main(int ac, char **av)
 {
 	t_box box;
 
-	get_arg (ac, av, check_av(ac, av), box.array);
-	/* la sumulacion empieza cuando todo se crea */
+	get_arg (ac, av, check_av(ac, av), box.arr);
 	int i = 0;
 	while (i < (ac - 1))
-		printf("%d\n", box.array[i++]);
+		printf("%d\n", box.arr[i++]);
 	return (EXIT_SUCCESS);
 }
