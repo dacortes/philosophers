@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:12:05 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/14 17:58:41 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:02:09 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	eating_rn(t_philo *aux)
 {
-
+	pthread_mutex_lock(&aux->left);
+	pthread_mutex_lock(aux->right);
 }
 
 void	*start_rn(void *ptr)
