@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:12:05 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/14 18:02:09 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:28:26 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,28 @@ void	eating_rn(t_philo *aux)
 {
 	pthread_mutex_lock(&aux->left);
 	pthread_mutex_lock(aux->right);
+	show_ln(aux, FORK);
+	show_ln(aux, FORK);
+	pthread_mutex_lock(&aux->mt_tm_die);
+	aux->tm_die = tm_elapsed(aux->bx->start) + aux->bx->tm_die;
+	pthread_mutex_unlock(&aux->mt_tm_die);
+	show_ln(aux, EAT);
+	tm_sleep(aux->bx->tm_eat, aux->bx);
+	if (aux->bx->tm_mt_eat > 0 && aux->tm_lft_eat > 0)
+	{
+		aux->tm_lft_eat--;
+		if (!aux->tm_lft_eat)
+		{
+			pthread_mutex_lock(&aux->bx->ph_end);
+			aux->bx->end_of_ph++;
+			pthread_mutex_unlock(&aux->bx->ph_end);
+		}
+	}
+	pthread_mutex_unlock(&aux->left);
+	pthread_mutex_unlock(aux->right);
+	show_ln(aux, SLEEP);
+	tm_sleep(aux->bx->tm_sleep, aux);
+	show_ln(aux, THINK);
 }
 
 void	*start_rn(void *ptr)

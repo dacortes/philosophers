@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:07:41 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/14 16:34:46 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:12:48 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,19 +95,22 @@ struct s_box
 /*                            FUNTIONS                                        */
 /******************************************************************************/
 
-/* src/*/
-int	init(t_box *bx, int ac);
+/* src/init.c */
+int		init(t_box *bx, int ac);
+
+/* src/main.c*/
+void	show_ln(t_philo *ph, char *str);
 
 /* src/utils.c */
-int	ft_atoi(char *str);
-int	is_digit(char *str);
-int	tm_elapsed(struct timeval start);
-int	tm_sleep(int mllsec, t_box *bx);
+int		ft_atoi(char *str);
+int		is_digit(char *str);
+int		tm_elapsed(struct timeval start);
+int		tm_sleep(int mllsec, t_box *bx);
 
 /* src/routune.c  */
 void	*start_rn(void *ptr);
 
 /* src/parce.c */
-int	check_av(int ac, char **av);
-int	get_arg(int ac, char **av, int check, int *array);
+int		check_av(int ac, char **av);
+int		get_arg(int ac, char **av, int check, int *array);
 #endif

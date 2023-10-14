@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:21:05 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/14 18:11:08 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:11:38 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	show_ln(t_philo *ph, char *str)
 {
 	int	i;
 	int	end;
+
 	i = tm_elapsed(ph->bx->start);
 	pthread_mutex_lock(&ph->bx->mt_print);
 	pthread_mutex_lock(&ph->bx->sm_end);
