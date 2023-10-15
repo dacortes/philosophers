@@ -5,7 +5,7 @@ NAME = philo
 CC = gcc
 RM = rm -rf
 LIBC = ar -rcs
-FLAGS = -Wall -Wextra -Werror #-fsanitize=thread #-fsanitize=address
+FLAGS = -Wall -Wextra -Werror -fsanitize=thread #-fsanitize=address
 ################################################################################
 #  Bar                                                                         #
 ################################################################################

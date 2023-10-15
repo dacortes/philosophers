@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:12:05 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/15 11:08:51 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/15 12:01:57 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	*start_rn(void *ptr)
 	pthread_mutex_unlock(&aux->bx->sm_start);
 	if ((aux->num) % 2 == 1)
 	{
+		printf("hola\n");
 		tm_sleep(1, aux->bx);
 		pthread_mutex_lock(&aux->bx->sm_start);
 		pthread_mutex_unlock(&aux->bx->sm_start);

@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:07:41 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/15 11:13:42 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:14:56 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,9 @@ typedef struct s_philo			t_philo;
 
 struct s_philo
 {
-	int				num;
-	int				tm_die;
-	int				tm_lft_eat;
-	t_box			*bx;
+	int				id;
 	pthread_mutex_t	left;
 	pthread_mutex_t	*right;
-	pthread_mutex_t	mt_tm_die;
 };
 /*
 	arr[0] = num_philos arr[1] = tm_to_die
@@ -76,19 +72,10 @@ struct s_box
 {
 	int				arr[5];
 	int				n_philo;
-	int				tm_sleep;
 	int				tm_die;
 	int				tm_eat;
+	int				tm_sleep;
 	int				tm_mt_eat;
-	int				end_of_sm;
-	int				end_of_ph;
-	struct timeval	start;
-	t_philo			*philo;
-	pthread_t		*th;
-	pthread_mutex_t	mt_print;
-	pthread_mutex_t	sm_start;
-	pthread_mutex_t	sm_end;
-	pthread_mutex_t	ph_end;
 };
 
 /******************************************************************************/
@@ -96,21 +83,10 @@ struct s_box
 /******************************************************************************/
 
 /* src/init.c */
-int		init(t_box *bx, int ac);
-
-/* src/main.c*/
-void	show_ln(t_philo *ph, char *str);
 
 /* src/utils.c */
 int		ft_atoi(char *str);
 int		is_digit(char *str);
-int		tm_elapsed(struct timeval start);
-int		tm_sleep(int mllsec, t_box *bx);
-
-/* src/routune.c  */
-void	status(t_box *bx);
-void	*start_rn(void *ptr);
-void	tm_end(t_box *bx);
 
 /* src/parce.c */
 int		check_av(int ac, char **av);
