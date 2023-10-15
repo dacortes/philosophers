@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:07:41 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/14 18:12:48 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/15 11:13:42 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,9 @@ int		tm_elapsed(struct timeval start);
 int		tm_sleep(int mllsec, t_box *bx);
 
 /* src/routune.c  */
+void	status(t_box *bx);
 void	*start_rn(void *ptr);
+void	tm_end(t_box *bx);
 
 /* src/parce.c */
 int		check_av(int ac, char **av);

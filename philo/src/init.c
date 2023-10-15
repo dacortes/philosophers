@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:08:54 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/15 10:09:14 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/15 11:05:06 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ph_init(t_box *bx)
 		bx->philo[i].tm_lft_eat = bx->tm_mt_eat;
 		pthread_mutex_init(&bx->philo[i].left, NULL);
 		(i == 0) && (bx->philo[i].right = &bx->philo[bx->n_philo - 1].left);
-		(i > 0)	&& (bx->philo[i].right = &bx->philo[i - 1].left);
+		(i > 0) && (bx->philo[i].right = &bx->philo[i - 1].left);
 		pthread_mutex_init(&bx->philo[i].mt_tm_die, NULL);
 		bx->philo[i].bx = bx;
 		i++;
@@ -32,7 +32,7 @@ static int	ph_init(t_box *bx)
 	return (EXIT_SUCCESS);
 }
 
-static int	ph_init(t_box *bx)
+static int	th_init(t_box *bx)
 {
 	int	i;
 	int	j;
@@ -41,9 +41,9 @@ static int	ph_init(t_box *bx)
 	while (i < (bx->n_philo))
 	{
 		j = i;
-		if (pthread_create(&bx->th[j], NULL, &start_rn, bx->th[j]))
-		//:v
-		;
+		if (pthread_create(&bx->th[j], NULL, &start_rn, bx->th[j]) != 0)
+			return ((printf(R"Error➜"E" create threads") * 0) + TRUE);
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -67,5 +67,6 @@ int	init(t_box *bx, int ac)
 	pthread_mutex_lock(&bx->sm_start);
 	gettimeofday(&bx->start, NULL);
 	ph_init(bx);
-	return  (EXIT_SUCCESS);
+	th_init(bx);
+	return (EXIT_SUCCESS);
 }

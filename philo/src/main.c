@@ -6,20 +6,11 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:21:05 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/14 18:11:38 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/15 11:16:01 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-/* memset, printf, malloc, free, write,
-usleep, gettimeofday, pthread_create,
-pthread_detach, pthread_join, pthread_mutex_init,
-pthread_mutex_destroy, pthread_mutex_lock,
-pthread_mutex_unlock */
-/* parameters 
-num philo and fork, time to die(ms), time to eat, time to sleep(ms)
-int _fork[num_fork];
-*/
 
 void	show_ln(t_philo *ph, char *str)
 {
@@ -42,14 +33,10 @@ int	main(int ac, char **av)
 
 	get_arg (ac, av, check_av(ac, av), bx.arr);
 	init(&bx, (ac - 1));
-	printf(R"%d\n"E, (ac - 1));
-	printf("num philos %d\n", bx.n_philo);
-	printf("tm_to_die %d\n", bx.tm_die);
-	printf("tm_to_eat %d\n", bx.tm_eat);
-	printf("tm_to_sleep %d\n", bx.tm_sleep);
-	(((ac - 1) == 5) && printf("number_of_times_each_philosopher_must_eat %d\n", bx.tm_mt_eat));
-	int i = 0;
-	while (i < (ac - 1))
-		printf(C"arr[%d]\n"E, bx.arr[i++]);
+	tm_sleep(1 , &bx);
+	pthread_mutex_unlock(&bx.sm_start);
+	gettimeofday(&bx.start, NULL);
+	status(&bx);
+	tm_end(&bx);
 	return (EXIT_SUCCESS);
 }
