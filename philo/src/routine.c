@@ -6,11 +6,29 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:12:05 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/15 09:37:14 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/15 10:08:39 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../inc/philo.h"
+
+int	status_tm_eaten(t_box *bx)
+{
+	int	fh_eating;
+
+	fh_eating = 0;
+	pthread_mutex_lock(&bx->ph_end);
+	fh_eating = bx->end_of_ph;
+	pthread_mutex_unlock(&bx->ph_end);
+	if (fh_eating == bx->n_philo)
+	{
+		pthread_mutex_lock(&bx->sm_end);
+		bx->end_of_sm = 1;
+		pthread_mutex_unlock(&bx->sm_end);
+		return (TRUE);
+	}
+	return (EXIT_SUCCESS);
+}
 
 void	status(t_box *bx)
 {
@@ -31,7 +49,7 @@ void	status(t_box *bx)
 			pthread_mutex_unlock(&bx->sm_end);
 			break ;
 		}
-		if (bx->tm_mt_eat > 0 && status_tm_eaten(bx) == 1)
+		if (bx->tm_mt_eat > 0 && status_tm_eaten(bx))
 			break ;
 		i++;
 		(i == bx->n_philo) && (i = 0);
@@ -94,4 +112,32 @@ void	*start_rn(void *ptr)
 		pthread_mutex_unlock(&aux->bx->end_of_sm);
 	}
 	return ((void *)0);
+}
+
+void	tm_end(t_box *bx)
+{
+	int	i;
+
+	i = 0;
+	while (i < bx->n_philo)
+	{
+		if (pthread_join(bx->th[i], NULL) != 0)
+			exit (print(R"Error➜"E" join threads\n"));
+		i++;
+	}
+	i = 0;
+	while (i < bx->n_philo)
+	{
+		pthread_mutex_destroy(&bx->philo[i].left);
+		pthread_mutex_destroy(&bx->philo[i].mt_tm_die);
+		i++;
+	}
+	pthread_mutex_destroy(&bx->mt_print);
+	pthread_mutex_destroy(&bx->sm_start);
+	pthread_mutex_destroy(&bx->sm_end);
+	pthread_mutex_destroy(&bx->ph_end);
+	if (bx->philo)
+		free(bx->philo);
+	if (bx->th)
+		free(bx->th);
 }

@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:08:54 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/14 16:22:28 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/15 10:09:14 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	ph_init(t_box *bx)
 	return (EXIT_SUCCESS);
 }
 
-static int	th_init(t_box *bx)
+static int	ph_init(t_box *bx)
 {
 	int	i;
 	int	j;
