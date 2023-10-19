@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:08:54 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/19 10:52:16 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:01:28 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*my_test(void *ph)
 	t_philo	*aux;
 
 	aux = (t_philo *)ph;
-	printf("%d\n", aux->id);
+	printf("%d\n", (aux->id + 1));
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:16:25 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/15 11:07:48 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:00:22 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ int	get_arg(int ac, char **av, int check, int *array)
 		while (i < (ac - 1))
 		{
 			array[i] = ft_atoi(av[j]);
+			if (array[0] >= 201)
+				exit (printf(R"Error➜"E" The maximum number of"\
+				" philosophers is 200\n"));
 			if (array[i] <= 0)
 				exit ((printf(R"Error➜"E" Do you want the box to explode?\n")
 						* 0) + ERROR);
