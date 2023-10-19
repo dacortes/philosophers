@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:08:54 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/19 10:47:59 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/19 10:52:16 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ int	init_th(t_box *box)
 	return (EXIT_FAILURE);
 }
 
-int	init_ph(t_philo **ph, int n_philo)
+int	init_ph(t_box *box)
 {
-	int	id;
+	int id;
 
 	id = 0;
-	while (id < n_philo)
+	while (id < box->n_philo)
 	{
-		(*ph)[id].id = id;
-		pthread_mutex_init(&(*ph)[id].right, NULL);
+		box->ph[id].id = id;
+		pthread_mutex_init(&box->ph[id].right, NULL);
 		id++;
 	}
 	return (EXIT_SUCCESS);
@@ -61,7 +61,7 @@ int	init(t_box *box, int *arr, int ac)
 	box->th = malloc(sizeof(pthread_t) * box->n_philo);
 	if (!box->ph || !box->th)
 		exit ((printf(R"Error➜"E" memory allocator") * 0) + ERROR);
-	init_ph(&box->ph, box->n_philo);
+	init_ph(box);
 	init_th(box);
 	return (EXIT_SUCCESS);
 }
