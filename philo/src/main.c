@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:21:05 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/19 14:10:05 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/19 14:32:44 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	end_sm(t_box *box)
 	id  = 0;
 	while (id < box->n_philo)
 	{
-		pthread_mutex_destroy(&box->ph[id].right);
+		pthread_mutex_destroy(&box->ph[id].left);
 		id++;
 	}
 	if (box->ph)

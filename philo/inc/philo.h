@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:07:41 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/19 14:22:43 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:04:47 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,30 @@ typedef struct s_philo t_philo;
 
 typedef struct s_box
 {
-	int			n_philo;
-	int			tm_die;
-	int			tm_eat;
-	int			tm_sleep;
-	int			tm_mt_eat;
-	struct s_philo		*ph;
-	pthread_t	*th;
+	int				n_philo;
+	int				tm_die;
+	int				tm_eat;
+	int				tm_sleep;
+	int				n_eat;
+	int				eat_n_ph;
+	struct timeval	start;
+	struct s_philo	*ph;
+	pthread_t		*th;
+	pthread_mutex_t m_start;
+	pthread_mutex_t	m_sttus;
+	pthread_mutex_t	m_endsm;
+	pthread_mutex_t	m_endph;
 }	t_box;
 
 struct s_philo
 {
 	int				id;
+	int				die;
+	int				eat_tm_left;
+	pthread_mutex_t	left;
+	pthread_mutex_t	*right;
+	pthread_mutex_t	m_die;
 	t_box			*box;
-	pthread_mutex_t	*left;
-	pthread_mutex_t	right;
 };
 
 /******************************************************************************/
