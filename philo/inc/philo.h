@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:07:41 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/15 18:14:56 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/19 10:37:53 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,35 +54,34 @@
 # define THINK	"\033[1;32mis thinking\033[m"
 # define DIE	"\033[1;31mdied\033[m"
 
-typedef struct s_box			t_box;
-typedef struct s_philo			t_philo;
-
-struct s_philo
+typedef struct s_philo
 {
 	int				id;
-	pthread_mutex_t	left;
-	pthread_mutex_t	*right;
-};
+	pthread_mutex_t	*left;
+	pthread_mutex_t	right;
+}	t_philo;
 /*
 	arr[0] = num_philos arr[1] = tm_to_die
 	arr[2] = tm_to_eat  arr[3] = tm_to_sleep
 	arr[4] = number_of_times_each_philosopher_must_eat 
 */
-struct s_box
+typedef struct s_box
 {
-	int				arr[5];
-	int				n_philo;
-	int				tm_die;
-	int				tm_eat;
-	int				tm_sleep;
-	int				tm_mt_eat;
-};
+	int			n_philo;
+	int			tm_die;
+	int			tm_eat;
+	int			tm_sleep;
+	int			tm_mt_eat;
+	t_philo		*ph;
+	pthread_t	*th;
+}	t_box;
 
 /******************************************************************************/
 /*                            FUNTIONS                                        */
 /******************************************************************************/
 
 /* src/init.c */
+int	init(t_box *box, int *arr, int ac);
 
 /* src/utils.c */
 int		ft_atoi(char *str);

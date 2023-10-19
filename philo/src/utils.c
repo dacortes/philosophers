@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:06:38 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/14 16:34:29 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:23:53 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,4 @@ int	is_digit(char *str)
 		i++;
 	}
 	return (TRUE);
-}
-
-int	tm_elapsed(struct timeval start)
-{
-	struct timeval	end;
-	suseconds_t		pss;
-
-	gettimeofday(&end, NULL);
-	pss = (end.tv_usec / 1000 + end.tv_sec * 1000)
-		- (start.tv_usec / 1000 + end.tv_sec * 1000);
-	return (pss);
-}
-
-int	tm_sleep(int mllsec, t_box *bx)
-{
-	int	end;
-
-	end = tm_elapsed(bx->start) + mllsec;
-	while (tm_elapsed(bx->start) < end)
-		usleep(200);
-	return (EXIT_SUCCESS);
 }

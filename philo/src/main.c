@@ -6,20 +6,39 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:21:05 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/15 18:06:41 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:22:21 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
+int	end_sm(t_box *box)
+{
+	int	id;
+
+	id  = 0;
+	while (id < box->n_philo)
+	{
+		pthread_mutex_destroy(&box->ph[id].right);
+		id++;
+	}
+	if (box->ph)
+		free(box->ph);
+	return (EXIT_SUCCESS);
+}
+
 int	main(int ac, char **av)
 {
-	t_box bx;
+	t_box	box;
+	int		arr[5];
 
-	get_arg (ac, av, check_av(ac, av), bx.arr);
-	printf("%d\n", bx.n_philo);
-	printf("%d\n", bx.tm_die);
-	printf("%d\n", bx.tm_eat);
-	printf("%d\n", bx.tm_sleep);
+	get_arg (ac, av, check_av(ac, av), arr);
+	init(&box, arr, (ac - 1));
+	while (TRUE)
+	{
+		if (usleep(10000) == 0)
+			break ;
+	}
+	end_sm(&box);
 	return (EXIT_SUCCESS);
 }
