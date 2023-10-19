@@ -6,13 +6,13 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:08:54 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/19 11:01:28 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/19 14:22:27 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void	*my_test(void *ph)
+void	*run(void *ph)
 {
 	t_philo	*aux;
 
@@ -28,7 +28,7 @@ int	init_th(t_box *box)
 	id = 0;
 	while (id < box->n_philo)
 	{
-		if (pthread_create(&box->th[id], NULL, my_test, &box->ph[id]) != 0)
+		if (pthread_create(&box->th[id], NULL, run, &box->ph[id]) != 0)
 			exit ((printf(R"Error➜"E" Create threads\n") * 0) + - ERROR);
 		id++;
 	}	

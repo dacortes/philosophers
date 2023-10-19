@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:21:05 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/15 19:22:21 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/19 14:10:05 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	end_sm(t_box *box)
 	}
 	if (box->ph)
 		free(box->ph);
+	if (box->th)
+		free(box->th);
 	return (EXIT_SUCCESS);
 }
 
@@ -34,11 +36,6 @@ int	main(int ac, char **av)
 
 	get_arg (ac, av, check_av(ac, av), arr);
 	init(&box, arr, (ac - 1));
-	while (TRUE)
-	{
-		if (usleep(10000) == 0)
-			break ;
-	}
 	end_sm(&box);
 	return (EXIT_SUCCESS);
 }
