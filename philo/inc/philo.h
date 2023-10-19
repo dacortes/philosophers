@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:07:41 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/19 15:04:47 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:38:18 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_box
 	int				tm_sleep;
 	int				n_eat;
 	int				eat_n_ph;
+	int				end;
 	struct timeval	start;
 	struct s_philo	*ph;
 	pthread_t		*th;
@@ -94,13 +95,19 @@ struct s_philo
 /******************************************************************************/
 
 /* src/init.c */
-int	init(t_box *box, int *arr, int ac);
-
-/* src/utils.c */
-int		ft_atoi(char *str);
-int		is_digit(char *str);
+int		init(t_box *box, int *arr, int ac);
 
 /* src/parce.c */
 int		check_av(int ac, char **av);
 int		get_arg(int ac, char **av, int check, int *array);
+
+/* src/rutine.c */
+void	*run(void *ph);
+
+/* src/utils.c */
+int		ft_atoi(char *str);
+int		is_digit(char *str);
+int		time_elapsed(struct timeval start);
+int		tm_sleep(t_box *box, int millisec);
+
 #endif

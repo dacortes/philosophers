@@ -6,20 +6,11 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:08:54 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/19 15:22:43 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:30:33 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-
-void	*run(void *ph)
-{
-	t_philo	*aux;
-
-	aux = (t_philo *)ph;
-	printf("philo: %d time_die: %d\n", (aux->id + 1), aux->die);
-	return (NULL);
-}
 
 int	init_th(t_box *box)
 {

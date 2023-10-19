@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:06:38 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/19 14:48:10 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:28:29 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,22 @@ int	tm_sleep(t_box *box, int millisec)
 	end = time_elapsed(box->start) + millisec;
 	while (time_elapsed(box->start) < end)
 		usleep(100);
+	return (EXIT_SUCCESS);
+}
+
+int	show_stt(t_philo *ph, char *str, int stt)
+{
+	int	tm;
+	int end;
+
+	end = 0;
+	pthread_mutex_lock(&ph->box->m_sttus);
+	pthread_mutex_lock(&ph->box->m_endsm);
+	end = ph->box->end;
+	pthread_mutex_unlock(&ph->box->m_endsm);
+	tm = time_elapsed(ph->box->start);
+	if (end != 1 || stt == 1)
+		printf("%d %d %s\n", tm, (ph->id + 1), str);
+	pthread_mutex_unlock(&ph->box->m_sttus);
 	return (EXIT_SUCCESS);
 }
