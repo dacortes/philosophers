@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:18:39 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/20 14:36:08 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:43:26 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,21 @@ typedef struct s_box
 	struct timeval	start;
 	struct s_philo	*philos;
 	pthread_t		*threads;
-	pthread_mutex_t	mprint;
-	pthread_mutex_t	mstart;
-	pthread_mutex_t	mend;
-	pthread_mutex_t	philo_end;
+	pthread_mutex_t	m_print;
+	pthread_mutex_t	m_start;
+	pthread_mutex_t	m_end;
+	pthread_mutex_t	m_end_ph;
 }	t_box;
+
 struct s_philo
 {
 	int					n_philo;
-	int					t_die;
+	int					die;
 	int					eat_times_left;
-	pthread_mutex_t		*r_fork;
+	pthread_mutex_t		*right;
 	pthread_mutex_t		l_fork;
-	pthread_mutex_t		mutex_t_die;
-	struct s_box		*main;
+	pthread_mutex_t		mutex_die;
+	struct s_box		*box;
 };
 
 /* src/parce.c */
@@ -94,21 +95,21 @@ int		ft_atoi(char *str);
 int		check_av(int ac, char **av);
 int		get_arg(int ac, char **av, int check, int *array);
 
-int			ft_box_init(t_box *main, char **args);
-void		ft_init_threads(t_box	*main);
+int			ft_box_init(t_box *box, char **args);
+void		ft_init_threads(t_box	*box);
 long		ft_time_pass(struct timeval start);
 
-void		ft_init_philos(t_box *main);
+void		ft_init_philos(t_box *box);
 void		*life(void *arg);
 void		eating(t_philo *philo);
 
-void		control(t_box *main);
-int			control_eat(t_box	*main);
-void		ft_end(t_box	*main);
+void		control(t_box *box);
+int			control_eat(t_box	*box);
+void		ft_end(t_box	*box);
 void		times_eaten(t_philo *philo);
 
 void		ft_print_line(char *color, t_philo *aux, char *s, int n);
-int			ft_sleep(int millisec, t_box *main);
-int			ft_sleep_start(int millisec, t_box *main);
+int			ft_sleep(int millisec, t_box *box);
+int			ft_sleep_start(int millisec, t_box *box);
 
 #endif

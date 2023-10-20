@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   box.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,16 +14,16 @@
 
 int	main(int ac, char **av)
 {
-	t_box	main;
+	t_box	box;
 	int		arr[5];
 
 	get_arg (ac, av, check_av(ac, av), arr);
-	if (ft_box_init(&main, av) != 0)
+	if (ft_box_init(&box, av) != 0)
 		return (1);
-	ft_sleep(100, &main);
-	gettimeofday(&main.start, NULL);
-	pthread_mutex_unlock(&main.mstart);
-	control(&main);
-	ft_end(&main);
+	ft_sleep(100, &box);
+	gettimeofday(&box.start, NULL);
+	pthread_mutex_unlock(&box.m_start);
+	control(&box);
+	ft_end(&box);
 	return (0);
 }
