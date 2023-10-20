@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/16 11:07:41 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/20 11:21:31 by dacortes         ###   ########.fr       */
+/*   Created: 2023/10/20 14:18:39 by dacortes          #+#    #+#             */
+/*   Updated: 2023/10/20 14:31:17 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,68 +48,67 @@
 # define FALSE	0
 # define TRUE	1
 /*  Status philo */
-# define FORK	"\033[1;32mhas taken a fork\033[m"
-# define EAT	"\033[1;33mis eating\033[m"
-# define SLEEP	"\033[38;5;128mis sleeping\033[m"
-# define THINK	"\033[1;32mis thinking\033[m"
-# define DIE	"\033[1;31mdied\033[m"
+# define FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define DEAD "died"
 
 /*
 	arr[0] = num_philos arr[1] = tm_to_die
 	arr[2] = tm_to_eat  arr[3] = tm_to_sleep
 	arr[4] = number_of_times_each_philosopher_must_eat 
 */
-typedef struct s_philo t_philo;
+typedef struct s_philo	t_philo;
 
 typedef struct s_box
 {
 	int				n_philo;
 	int				tm_die;
 	int				tm_eat;
-	int				tm_sleep;
+	int				tm_dream;
 	int				n_eat;
-	int				eat_n_ph;
-	int				end;
-	struct timeval	start;
-	struct s_philo	*ph;
-	pthread_t		*th;
-	pthread_mutex_t m_start;
-	pthread_mutex_t	m_sttus;
-	pthread_mutex_t	m_endsm;
-	pthread_mutex_t	m_endph;
+	int				finish;
+	int				n_eat_philo;
+	struct timeval	t_start;
+	struct s_philo	*philos;
+	pthread_t		*threads;
+	pthread_mutex_t	mprint;
+	pthread_mutex_t	mstart;
+	pthread_mutex_t	mfinish;
+	pthread_mutex_t	philo_finish;
 }	t_box;
-
 struct s_philo
 {
-	int				id;
-	int				die;
-	int				eat_tm_left;
-	pthread_mutex_t	left;
-	pthread_mutex_t	*right;
-	pthread_mutex_t	m_die;
-	t_box			*box;
+	int					n_philo;
+	int					t_die;
+	int					eat_times_left;
+	pthread_mutex_t		*r_fork;
+	pthread_mutex_t		l_fork;
+	pthread_mutex_t		mutex_t_die;
+	struct s_box		*main;
 };
 
-/******************************************************************************/
-/*                            FUNTIONS                                        */
-/******************************************************************************/
-
-/* src/init.c */
-int		init(t_box *box, int *arr, int ac);
-
 /* src/parce.c */
+int		ft_atoi(char *str);
 int		check_av(int ac, char **av);
 int		get_arg(int ac, char **av, int check, int *array);
 
-/* src/rutine.c */
-void	*run(void *ph);
-void	eating(t_philo *ph);
-void	supervisor(t_box *box);
+int			ft_box_init(t_box *main, char **args);
+void		ft_init_threads(t_box	*main);
+long		ft_time_pass(struct timeval t_start);
 
-/* src/utils.c */
-int		ft_atoi(char *str);
-int		is_digit(char *str);
-int		time_elapsed(struct timeval start);
-int		tm_sleep(t_box *box, int millisec);
-int		show_stt(t_philo *ph, char *str, int stt);
+void		ft_init_philos(t_box *main);
+void		*life(void *arg);
+void		eating(t_philo *philo);
+
+void		control(t_box *main);
+int			control_eat(t_box	*main);
+void		ft_finish(t_box	*main);
+void		times_eaten(t_philo *philo);
+
+void		ft_print_line(char *color, t_philo *aux, char *s, int n);
+int			ft_sleep(int millisec, t_box *main);
+int			ft_sleep_start(int millisec, t_box *main);
+
 #endif

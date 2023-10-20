@@ -5,124 +5,125 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 16:12:05 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/20 12:30:17 by dacortes         ###   ########.fr       */
+/*   Created: 2023/10/20 14:13:28 by dacortes          #+#    #+#             */
+/*   Updated: 2023/10/20 14:31:17 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-static void	times_eaten(t_philo *ph)
+void	*life(void *arg)
 {
-	if (ph->box->n_eat >= ph->eat_tm_left && ph->eat_tm_left >= 0)
-	{
-		ph->eat_tm_left--;
-		if (!ph->eat_tm_left)
-		{
-			pthread_mutex_lock(&ph->box->m_endph);
-			ph->box->eat_n_ph++;
-			pthread_mutex_unlock(&ph->box->m_endph);
-		}
-	}
-}
-
-void	eating(t_philo *ph)
-{
-	pthread_mutex_lock(&ph->left);
-	show_stt(ph, FORK, 0);
-	if (ph->box->n_philo == 1)
-	{
-		while (ph->box->end == 0)
-			tm_sleep(ph->box, 1);
-		exit (TRUE);
-	}
-	pthread_mutex_lock(ph->right);
-	show_stt(ph, FORK, 0);
-	pthread_mutex_lock(&ph->m_die);
-	ph->die = time_elapsed((ph->box->start)) + ph->box->tm_die;
-	pthread_mutex_unlock(&ph->m_die);
-	if (ph->eat_tm_left != 0)
-		show_stt(ph, EAT, 0);
-	times_eaten(ph);
-	tm_sleep(ph->box, ph->box->tm_eat);
-	pthread_mutex_lock(&ph->left);
-	pthread_mutex_lock(ph->right);
-	if (ph->eat_tm_left != 0)
-		show_stt(ph, SLEEP, 0);
-	tm_sleep(ph->box, ph->box->tm_sleep);
-	if (ph->eat_tm_left != 0)
-		show_stt(ph, THINK, 0);
-}
-
-void	*run(void *ph)
-{
-	t_philo	*aux;
+	t_philo	*philo;
 	int		stt;
 
-	aux = (t_philo *)ph;
-	pthread_mutex_lock(&aux->box->m_start);
-	pthread_mutex_unlock(&aux->box->m_start);
-	if (aux->id % 2 == 1)
+	philo = (t_philo *) arg;
+	pthread_mutex_lock(&philo->main->mstart);
+	pthread_mutex_unlock(&philo->main->mstart);
+	if (philo->n_philo % 2 == 1)
 	{
-		tm_sleep(aux->box, 50);
-		pthread_mutex_lock(&aux->box->m_start);
-		pthread_mutex_unlock(&aux->box->m_start);
+		ft_sleep(50, philo->main);
+		pthread_mutex_lock(&philo->main->mstart);
+		pthread_mutex_unlock(&philo->main->mstart);
 	}
 	stt = 0;
 	while (stt != 1)
 	{
-		eating(aux);
-		pthread_mutex_lock(&aux->box->m_endsm);
-		stt = aux->box->end;
-		pthread_mutex_unlock(&aux->box->m_endsm);
+		eating(philo);
+		pthread_mutex_lock(&philo->main->mfinish);
+		stt = philo->main->finish;
+		pthread_mutex_unlock(&philo->main->mfinish);
 	}
-	return (NULL);
+	return ((void *) 0);
 }
 
-static int	supervisor_eat(t_box *box)
+void	eating(t_philo *philo)
 {
-	int	n_eat;
-	int	end;
-
-	end = 0;
-	pthread_mutex_lock(&box->m_endph);
-	n_eat = box->eat_n_ph;
-	pthread_mutex_unlock(&box->m_endph);
-	if (n_eat == box->n_philo)
+	pthread_mutex_lock(&philo->l_fork);
+	ft_print_line(G, philo, FORK, 0);
+	if (philo->main->n_philo == 1)
 	{
-		pthread_mutex_lock(&box->m_endsm);
-		box->end = 1;
-		pthread_mutex_unlock(&box->m_endsm);
-		show_stt(&box->ph[end], "end", 1);
-		return (TRUE);
+		while (philo->main->finish == 0)
+			ft_sleep(1, philo->main);
+		exit(1);
 	}
-	return (EXIT_SUCCESS);
+	pthread_mutex_lock(philo->r_fork);
+	ft_print_line(G, philo, FORK, 0);
+	pthread_mutex_lock(&philo->mutex_t_die);
+	philo->t_die = ft_time_pass(philo->main->t_start) + philo->main->tm_die;
+	pthread_mutex_unlock(&philo->mutex_t_die);
+	if (philo->eat_times_left != 0)
+		ft_print_line(Y, philo, EAT, 0);
+	times_eaten(philo);
+	ft_sleep(philo->main->tm_eat, philo->main);
+	pthread_mutex_unlock(&philo->l_fork);
+	pthread_mutex_unlock(philo->r_fork);
+	if (philo->eat_times_left != 0)
+		ft_print_line(B, philo, SLEEP, 0);
+	ft_sleep(philo->main->tm_dream, philo->main);
+	if (philo->eat_times_left != 0)
+		ft_print_line(O, philo, THINK, 0);
 }
 
-void	supervisor(t_box *box)
+void	control(t_box *main)
 {
-	int	id;
-	int	tm;
+	int	i;
+	int	time;
 
-	id = 0;
-	while (id < box->n_philo)
+	i = 0;
+	while (i < main->n_philo)
 	{
-		pthread_mutex_lock(&box->ph[id].m_die);
-		tm = box->ph[id].die;
-		pthread_mutex_unlock(&box->ph[id].m_die);
-		if (time_elapsed(box->start) > tm)
+		pthread_mutex_lock(&main->philos[i].mutex_t_die);
+		time = main->philos[i].t_die;
+		pthread_mutex_unlock(&main->philos[i].mutex_t_die);
+		if (ft_time_pass(main->t_start) > time)
 		{
-			pthread_mutex_lock(&box->m_endsm);
-			box->end = 1;
-			pthread_mutex_unlock(&box->m_endsm);
-			show_stt(&box->ph[id], DIE, 1);
+			pthread_mutex_lock(&main->mfinish);
+			main->finish = 1;
+			pthread_mutex_unlock(&main->mfinish);
+			ft_print_line(R, &main->philos[i], DEAD, 1);
 			break ;
 		}
-		if (box->n_eat > 0 && supervisor_eat(box))
+		if (main->n_eat > 0 && control_eat(main) == 1)
 			break ;
-		id++;
-		if (id == box->n_philo)
-			id = 0;
+		i++;
+		if (i == main->n_philo)
+			i = 0;
 		usleep(60);
 	}
+}
+
+void	times_eaten(t_philo *philo)
+{
+	if (philo->main->n_eat >= philo->eat_times_left
+		&& philo->eat_times_left >= 0)
+	{
+		philo->eat_times_left--;
+		if (philo->eat_times_left == 0)
+		{
+			pthread_mutex_lock(&philo->main->philo_finish);
+			philo->main->n_eat_philo++;
+			pthread_mutex_unlock(&philo->main->philo_finish);
+		}
+	}
+}
+
+int	control_eat(t_box	*main)
+{
+	int	i;
+	int	aux;
+
+	i = 0;
+	pthread_mutex_lock(&main->philo_finish);
+	aux = main->n_eat_philo;
+	pthread_mutex_unlock(&main->philo_finish);
+	if (aux == main->n_philo)
+	{
+		pthread_mutex_lock(&main->mfinish);
+		main->finish = 1;
+		pthread_mutex_unlock(&main->mfinish);
+		ft_print_line(R, &main->philos[i], "ha terminado", 1);
+		return (1);
+	}
+	return (0);
 }

@@ -5,66 +5,74 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 15:08:54 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/20 11:51:42 by dacortes         ###   ########.fr       */
+/*   Created: 2023/10/20 14:24:52 by dacortes          #+#    #+#             */
+/*   Updated: 2023/10/20 14:31:17 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int	init_th(t_box *box)
+int	ft_box_init(t_box *main, char **args)
 {
-	int	id;
-
-	id = 0;
-	while (id < box->n_philo)
+	main->finish = 0;
+	main->n_eat_philo = 0;
+	main->n_philo = ft_atoi(args[1]);
+	main->tm_die = ft_atoi(args[2]);
+	main->tm_eat = ft_atoi(args[3]);
+	main->tm_dream = ft_atoi(args[4]);
+	main->n_eat = -1;
+	if (args[5])
+		main->n_eat = ft_atoi(args[5]);
+	pthread_mutex_init(&main->mstart, NULL);
+	pthread_mutex_init(&main->mfinish, NULL);
+	pthread_mutex_init(&main->philo_finish, NULL);
+	pthread_mutex_init(&main->mprint, NULL);
+	main->philos = malloc(main->n_philo * sizeof(t_philo));
+	if (!main->philos)
+		return (1);
+	main->threads = malloc(main->n_philo * sizeof(pthread_t));
+	if (!main->threads)
 	{
-		if (pthread_create(&box->th[id], NULL, run, &box->ph[id]) != 0)
-			exit ((printf(R"Error➜"E" Create threads\n") * 0) + ERROR);
-		id++;
+		free(main->philos);
+		return (1);
 	}
-	return (EXIT_FAILURE);
+	ft_init_philos (main);
+	ft_init_threads(main);
+	return (0);
 }
 
-static int	init_ph(t_box *box)
+void	ft_init_philos(t_box *main)
 {
-	int	id;
+	int	i;
 
-	id = 0;
-	pthread_mutex_lock (&box->m_start);
-	while (id < box->n_philo)
+	i = 0;
+	pthread_mutex_lock(&main->mstart);
+	while (i < main->n_philo)
 	{
-		box->ph[id].id = id;
-		box->ph[id].die = box->tm_die;
-		box->ph[id].eat_tm_left = box->n_eat;
-		(id == 0) && (box->ph[id].right = &box->ph[box->n_philo - 1].left);
-		(id > 0) && (box->ph[id].right = &box->ph[id - 1].left);
-		pthread_mutex_init(box->ph[id].right, NULL);
-		pthread_mutex_init(&box->ph[id].left, NULL);
-		pthread_mutex_init(&box->ph[id].m_die, NULL);
-		box->ph[id].box = box;
-		id++;
+		main->philos[i].n_philo = i;
+		main->philos[i].t_die = main->tm_die;
+		main->philos[i].eat_times_left = main->n_eat;
+		if (i == 0)
+			main->philos[i].r_fork
+				= &main->philos[main->n_philo - 1].l_fork;
+		else
+			main->philos[i].r_fork = &main->philos[i - 1].l_fork;
+		pthread_mutex_init(main->philos[i].r_fork, NULL);
+		pthread_mutex_init(&main->philos[i].l_fork, NULL);
+		pthread_mutex_init(&main->philos[i].mutex_t_die, NULL);
+		main->philos[i].main = main;
+		i++;
 	}
-	return (EXIT_SUCCESS);
 }
 
-int	init(t_box *box, int *arr, int ac)
+void	ft_init_threads(t_box	*main)
 {
-	box->n_philo = arr[0];
-	box->tm_die = arr[1];
-	box->tm_eat = arr[2];
-	box->tm_sleep = arr[3];
-	box->n_eat = NOT;
-	(ac == 5) && (box->n_eat = arr[4]);
-	pthread_mutex_init(&box->m_start, NULL);
-	pthread_mutex_init(&box->m_sttus, NULL);
-	pthread_mutex_init(&box->m_endsm, NULL);
-	pthread_mutex_init(&box->m_endph, NULL);
-	box->ph = malloc(sizeof(t_philo) * box->n_philo);
-	box->th = malloc(sizeof(pthread_t) * box->n_philo);
-	if (!box->ph || !box->th)
-		exit ((printf(R"Error➜"E" memory allocator") * 0) + ERROR);
-	init_ph(box);
-	init_th(box);
-	return (EXIT_SUCCESS);
+	int	i;
+
+	i = 0;
+	while (i < main->n_philo)
+	{
+		pthread_create(&main->threads[i], NULL, &life, &main->philos[i]);
+		i++;
+	}
 }
