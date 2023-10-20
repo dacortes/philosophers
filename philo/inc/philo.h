@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:07:41 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/19 15:38:18 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/20 11:21:31 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,13 @@ int		get_arg(int ac, char **av, int check, int *array);
 
 /* src/rutine.c */
 void	*run(void *ph);
+void	eating(t_philo *ph);
+void	supervisor(t_box *box);
 
 /* src/utils.c */
 int		ft_atoi(char *str);
 int		is_digit(char *str);
 int		time_elapsed(struct timeval start);
 int		tm_sleep(t_box *box, int millisec);
-
+int		show_stt(t_philo *ph, char *str, int stt);
 #endif

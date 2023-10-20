@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:06:38 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/19 16:28:29 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/20 12:25:27 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	tm_sleep(t_box *box, int millisec)
 int	show_stt(t_philo *ph, char *str, int stt)
 {
 	int	tm;
-	int end;
+	int	end;
 
 	end = 0;
 	pthread_mutex_lock(&ph->box->m_sttus);

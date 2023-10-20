@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:08:54 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/19 15:30:33 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/20 11:51:42 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ int	init_th(t_box *box)
 	while (id < box->n_philo)
 	{
 		if (pthread_create(&box->th[id], NULL, run, &box->ph[id]) != 0)
-			exit ((printf(R"Error➜"E" Create threads\n") * 0) + - ERROR);
+			exit ((printf(R"Error➜"E" Create threads\n") * 0) + ERROR);
 		id++;
-	}	
+	}
 	return (EXIT_FAILURE);
 }
 
 static int	init_ph(t_box *box)
 {
-	int id;
+	int	id;
 
 	id = 0;
 	pthread_mutex_lock (&box->m_start);
@@ -42,6 +42,7 @@ static int	init_ph(t_box *box)
 		pthread_mutex_init(box->ph[id].right, NULL);
 		pthread_mutex_init(&box->ph[id].left, NULL);
 		pthread_mutex_init(&box->ph[id].m_die, NULL);
+		box->ph[id].box = box;
 		id++;
 	}
 	return (EXIT_SUCCESS);
