@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:24:42 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/20 14:26:57 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:36:08 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	main(int ac, char **av)
 	if (ft_box_init(&main, av) != 0)
 		return (1);
 	ft_sleep(100, &main);
-	gettimeofday(&main.t_start, NULL);
+	gettimeofday(&main.start, NULL);
 	pthread_mutex_unlock(&main.mstart);
 	control(&main);
-	ft_finish(&main);
+	ft_end(&main);
 	return (0);
 }

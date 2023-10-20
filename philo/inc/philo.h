@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:18:39 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/20 14:31:17 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:36:08 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,15 @@ typedef struct s_box
 	int				tm_eat;
 	int				tm_dream;
 	int				n_eat;
-	int				finish;
-	int				n_eat_philo;
-	struct timeval	t_start;
+	int				end;
+	int				eat_n_ph;
+	struct timeval	start;
 	struct s_philo	*philos;
 	pthread_t		*threads;
 	pthread_mutex_t	mprint;
 	pthread_mutex_t	mstart;
-	pthread_mutex_t	mfinish;
-	pthread_mutex_t	philo_finish;
+	pthread_mutex_t	mend;
+	pthread_mutex_t	philo_end;
 }	t_box;
 struct s_philo
 {
@@ -96,7 +96,7 @@ int		get_arg(int ac, char **av, int check, int *array);
 
 int			ft_box_init(t_box *main, char **args);
 void		ft_init_threads(t_box	*main);
-long		ft_time_pass(struct timeval t_start);
+long		ft_time_pass(struct timeval start);
 
 void		ft_init_philos(t_box *main);
 void		*life(void *arg);
@@ -104,7 +104,7 @@ void		eating(t_philo *philo);
 
 void		control(t_box *main);
 int			control_eat(t_box	*main);
-void		ft_finish(t_box	*main);
+void		ft_end(t_box	*main);
 void		times_eaten(t_philo *philo);
 
 void		ft_print_line(char *color, t_philo *aux, char *s, int n);

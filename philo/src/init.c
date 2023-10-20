@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:24:52 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/20 14:31:17 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:34:15 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_box_init(t_box *main, char **args)
 {
-	main->finish = 0;
-	main->n_eat_philo = 0;
+	main->end = 0;
+	main->eat_n_ph = 0;
 	main->n_philo = ft_atoi(args[1]);
 	main->tm_die = ft_atoi(args[2]);
 	main->tm_eat = ft_atoi(args[3]);
@@ -24,8 +24,8 @@ int	ft_box_init(t_box *main, char **args)
 	if (args[5])
 		main->n_eat = ft_atoi(args[5]);
 	pthread_mutex_init(&main->mstart, NULL);
-	pthread_mutex_init(&main->mfinish, NULL);
-	pthread_mutex_init(&main->philo_finish, NULL);
+	pthread_mutex_init(&main->mend, NULL);
+	pthread_mutex_init(&main->philo_end, NULL);
 	pthread_mutex_init(&main->mprint, NULL);
 	main->philos = malloc(main->n_philo * sizeof(t_philo));
 	if (!main->philos)
