@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:18:39 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/20 14:43:26 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:54:27 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@
 # define DEAD "died"
 
 /*
-	arr[0] = num_philos arr[1] = tm_to_die
+	arr[0] = num_ph arr[1] = tm_to_die
 	arr[2] = tm_to_eat  arr[3] = tm_to_sleep
-	arr[4] = number_of_times_each_philosopher_must_eat 
+	arr[4] = number_of_times_each_phopher_must_eat 
 */
 typedef struct s_philo	t_philo;
 
@@ -71,7 +71,7 @@ typedef struct s_box
 	int				end;
 	int				eat_n_ph;
 	struct timeval	start;
-	struct s_philo	*philos;
+	struct s_philo	*ph;
 	pthread_t		*threads;
 	pthread_mutex_t	m_print;
 	pthread_mutex_t	m_start;
@@ -83,9 +83,9 @@ struct s_philo
 {
 	int					n_philo;
 	int					die;
-	int					eat_times_left;
+	int					eat_tm_left;
 	pthread_mutex_t		*right;
-	pthread_mutex_t		l_fork;
+	pthread_mutex_t		left;
 	pthread_mutex_t		mutex_die;
 	struct s_box		*box;
 };
@@ -99,7 +99,7 @@ int			ft_box_init(t_box *box, char **args);
 void		ft_init_threads(t_box	*box);
 long		ft_time_pass(struct timeval start);
 
-void		ft_init_philos(t_box *box);
+void		ft_init_ph(t_box *box);
 void		*life(void *arg);
 void		eating(t_philo *philo);
 

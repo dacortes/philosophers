@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:25:09 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/20 14:43:26 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:54:27 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ void	ft_end(t_box *box)
 	i = 0;
 	while (i < (box->n_philo))
 	{
-		pthread_mutex_destroy(&box->philos[i].l_fork);
-		pthread_mutex_destroy(&box->philos[i].mutex_die);
+		pthread_mutex_destroy(&box->ph[i].left);
+		pthread_mutex_destroy(&box->ph[i].mutex_die);
 		i++;
 	}
 	pthread_mutex_destroy(&box->m_end);
 	pthread_mutex_destroy(&box->m_print);
 	pthread_mutex_destroy(&box->m_start);
 	pthread_mutex_destroy(&box->m_end_ph);
-	free(box->philos);
+	free(box->ph);
 	free(box->threads);
 }

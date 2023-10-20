@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:13:28 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/20 14:43:26 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:54:27 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*life(void *arg)
 
 void	eating(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->l_fork);
+	pthread_mutex_lock(&philo->left);
 	ft_print_line(G, philo, FORK, 0);
 	if (philo->box->n_philo == 1)
 	{
@@ -52,16 +52,16 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->mutex_die);
 	philo->die = ft_time_pass(philo->box->start) + philo->box->tm_die;
 	pthread_mutex_unlock(&philo->mutex_die);
-	if (philo->eat_times_left != 0)
+	if (philo->eat_tm_left != 0)
 		ft_print_line(Y, philo, EAT, 0);
 	times_eaten(philo);
 	ft_sleep(philo->box->tm_eat, philo->box);
-	pthread_mutex_unlock(&philo->l_fork);
+	pthread_mutex_unlock(&philo->left);
 	pthread_mutex_unlock(philo->right);
-	if (philo->eat_times_left != 0)
+	if (philo->eat_tm_left != 0)
 		ft_print_line(B, philo, SLEEP, 0);
 	ft_sleep(philo->box->tm_dream, philo->box);
-	if (philo->eat_times_left != 0)
+	if (philo->eat_tm_left != 0)
 		ft_print_line(O, philo, THINK, 0);
 }
 
@@ -73,15 +73,15 @@ void	control(t_box *box)
 	i = 0;
 	while (i < box->n_philo)
 	{
-		pthread_mutex_lock(&box->philos[i].mutex_die);
-		time = box->philos[i].die;
-		pthread_mutex_unlock(&box->philos[i].mutex_die);
+		pthread_mutex_lock(&box->ph[i].mutex_die);
+		time = box->ph[i].die;
+		pthread_mutex_unlock(&box->ph[i].mutex_die);
 		if (ft_time_pass(box->start) > time)
 		{
 			pthread_mutex_lock(&box->m_end);
 			box->end = 1;
 			pthread_mutex_unlock(&box->m_end);
-			ft_print_line(R, &box->philos[i], DEAD, 1);
+			ft_print_line(R, &box->ph[i], DEAD, 1);
 			break ;
 		}
 		if (box->n_eat > 0 && control_eat(box) == 1)
@@ -95,11 +95,11 @@ void	control(t_box *box)
 
 void	times_eaten(t_philo *philo)
 {
-	if (philo->box->n_eat >= philo->eat_times_left
-		&& philo->eat_times_left >= 0)
+	if (philo->box->n_eat >= philo->eat_tm_left
+		&& philo->eat_tm_left >= 0)
 	{
-		philo->eat_times_left--;
-		if (philo->eat_times_left == 0)
+		philo->eat_tm_left--;
+		if (philo->eat_tm_left == 0)
 		{
 			pthread_mutex_lock(&philo->box->m_end_ph);
 			philo->box->eat_n_ph++;
@@ -122,7 +122,7 @@ int	control_eat(t_box	*box)
 		pthread_mutex_lock(&box->m_end);
 		box->end = 1;
 		pthread_mutex_unlock(&box->m_end);
-		ft_print_line(R, &box->philos[i], "ha terminado", 1);
+		ft_print_line(R, &box->ph[i], "ha terminado", 1);
 		return (1);
 	}
 	return (0);
