@@ -6,42 +6,13 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:24:52 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/20 14:54:27 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/21 10:10:16 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int	ft_box_init(t_box *box, char **args)
-{
-	box->end = 0;
-	box->eat_n_ph = 0;
-	box->n_philo = ft_atoi(args[1]);
-	box->tm_die = ft_atoi(args[2]);
-	box->tm_eat = ft_atoi(args[3]);
-	box->tm_dream = ft_atoi(args[4]);
-	box->n_eat = -1;
-	if (args[5])
-		box->n_eat = ft_atoi(args[5]);
-	pthread_mutex_init(&box->m_start, NULL);
-	pthread_mutex_init(&box->m_end, NULL);
-	pthread_mutex_init(&box->m_end_ph, NULL);
-	pthread_mutex_init(&box->m_print, NULL);
-	box->ph = malloc(box->n_philo * sizeof(t_philo));
-	if (!box->ph)
-		return (1);
-	box->threads = malloc(box->n_philo * sizeof(pthread_t));
-	if (!box->threads)
-	{
-		free(box->ph);
-		return (1);
-	}
-	ft_init_ph (box);
-	ft_init_threads(box);
-	return (0);
-}
-
-void	ft_init_ph(t_box *box)
+static void	init_ph(t_box *box)
 {
 	int	i;
 
@@ -59,20 +30,44 @@ void	ft_init_ph(t_box *box)
 			box->ph[i].right = &box->ph[i - 1].left;
 		pthread_mutex_init(box->ph[i].right, NULL);
 		pthread_mutex_init(&box->ph[i].left, NULL);
-		pthread_mutex_init(&box->ph[i].mutex_die, NULL);
+		pthread_mutex_init(&box->ph[i].m_die, NULL);
 		box->ph[i].box = box;
 		i++;
 	}
 }
 
-void	ft_init_threads(t_box	*box)
+static void	init_th(t_box	*box)
 {
 	int	i;
 
 	i = 0;
 	while (i < box->n_philo)
 	{
-		pthread_create(&box->threads[i], NULL, &life, &box->ph[i]);
+		if (pthread_create(&box->th[i], NULL, &run, &box->ph[i]) != 0)
+			exit ((printf(R"Error➜"E" Create threads\n") * 0) + ERROR);
 		i++;
 	}
+}
+
+int	init(t_box *box, char **arr, int ac)
+{
+	box->end = 0;
+	box->eat_n_ph = 0;
+	box->n_philo = ft_atoi(arr[1]);
+	box->tm_die = ft_atoi(arr[2]);
+	box->tm_eat = ft_atoi(arr[3]);
+	box->tm_dream = ft_atoi(arr[4]);
+	box->n_eat = NOT;
+	(ac == 5) && (box->n_eat = ft_atoi(arr[5]));
+	pthread_mutex_init(&box->m_start, NULL);
+	pthread_mutex_init(&box->m_end, NULL);
+	pthread_mutex_init(&box->m_end_ph, NULL);
+	pthread_mutex_init(&box->m_print, NULL);
+	box->ph = malloc(box->n_philo * sizeof(t_philo));
+	box->th = malloc(box->n_philo * sizeof(pthread_t));
+	if (!box->ph || !box->th)
+		exit ((printf(R"Error➜"E" memory allocator") * 0) + ERROR);
+	init_ph (box);
+	init_th(box);
+	return (EXIT_SUCCESS);
 }

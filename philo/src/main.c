@@ -18,12 +18,12 @@ int	main(int ac, char **av)
 	int		arr[5];
 
 	get_arg (ac, av, check_av(ac, av), arr);
-	if (ft_box_init(&box, av) != 0)
+	if (init(&box, av, (ac - 1)) != 0)
 		return (1);
-	ft_sleep(100, &box);
+	tm_sleep(100, &box);
 	gettimeofday(&box.start, NULL);
 	pthread_mutex_unlock(&box.m_start);
-	control(&box);
+	supervisor(&box);
 	ft_end(&box);
 	return (0);
 }

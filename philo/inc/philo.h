@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:18:39 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/20 14:54:27 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/21 10:24:44 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_box
 	int				eat_n_ph;
 	struct timeval	start;
 	struct s_philo	*ph;
-	pthread_t		*threads;
+	pthread_t		*th;
 	pthread_mutex_t	m_print;
 	pthread_mutex_t	m_start;
 	pthread_mutex_t	m_end;
@@ -86,30 +86,29 @@ struct s_philo
 	int					eat_tm_left;
 	pthread_mutex_t		*right;
 	pthread_mutex_t		left;
-	pthread_mutex_t		mutex_die;
+	pthread_mutex_t		m_die;
 	struct s_box		*box;
 };
 
-/* src/parce.c */
+/* src/init.c */
+int		init(t_box *box, char **arr, int ac);
+
+/* src/parse.c */
 int		ft_atoi(char *str);
 int		check_av(int ac, char **av);
 int		get_arg(int ac, char **av, int check, int *array);
 
-int			ft_box_init(t_box *box, char **args);
-void		ft_init_threads(t_box	*box);
+
 long		ft_time_pass(struct timeval start);
 
-void		ft_init_ph(t_box *box);
-void		*life(void *arg);
-void		eating(t_philo *philo);
+/* src/routine.c */
+void		*run(void *arg);
+void		supervisor(t_box *box);
 
-void		control(t_box *box);
-int			control_eat(t_box	*box);
 void		ft_end(t_box	*box);
-void		times_eaten(t_philo *philo);
 
 void		ft_print_line(char *color, t_philo *aux, char *s, int n);
-int			ft_sleep(int millisec, t_box *box);
-int			ft_sleep_start(int millisec, t_box *box);
+int			tm_sleep(int millisec, t_box *box);
+int			tm_sleep_start(int millisec, t_box *box);
 
 #endif
