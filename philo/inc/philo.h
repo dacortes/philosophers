@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:18:39 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/21 10:24:44 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/21 11:22:35 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,17 +98,15 @@ int		ft_atoi(char *str);
 int		check_av(int ac, char **av);
 int		get_arg(int ac, char **av, int check, int *array);
 
-
-long		ft_time_pass(struct timeval start);
-
 /* src/routine.c */
 void		*run(void *arg);
 void		supervisor(t_box *box);
 
+/* src/utils.c */
+long		time_elapsed(struct timeval start);
+void		show_stt(char *color, t_philo *ph, char *str, int stt);
+
 void		ft_end(t_box	*box);
 
-void		ft_print_line(char *color, t_philo *aux, char *s, int n);
 int			tm_sleep(int millisec, t_box *box);
-int			tm_sleep_start(int millisec, t_box *box);
-
 #endif
