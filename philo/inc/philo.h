@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:18:39 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/22 09:50:17 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/22 10:01:30 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ struct s_philo
 
 /* src/init.c */
 int			init(t_box *box, char **arr, int ac);
+int			clear_sm(t_philo **ph, pthread_t **th, int stt);
 
 /* src/parse.c */
 int			ft_atoi(char *str);

@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:25:09 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/22 09:37:49 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/22 10:02:25 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,5 @@ void	ft_end(t_box *box)
 	pthread_mutex_destroy(&box->m_print);
 	pthread_mutex_destroy(&box->m_start);
 	pthread_mutex_destroy(&box->m_end_ph);
-	if (box->ph)
-		free(box->ph);
-	if (box->th)
-		free(box->th);
+	clear_sm(&box->ph, &box->th, EXIT_SUCCESS);
 }

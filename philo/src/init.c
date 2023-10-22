@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:24:52 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/21 10:10:16 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/22 10:05:44 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	init_ph(t_box *box)
 	}
 }
 
-static void	init_th(t_box	*box)
+static int	init_th(t_box	*box)
 {
 	int	i;
 
@@ -44,9 +44,10 @@ static void	init_th(t_box	*box)
 	while (i < box->n_philo)
 	{
 		if (pthread_create(&box->th[i], NULL, &run, &box->ph[i]) != 0)
-			exit ((printf(R"Error➜"E" Create threads\n") * 0) + ERROR);
+			return ((printf(R"Error➜"E" Create threads\n") * 0) + ERROR);
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }
 
 int	init(t_box *box, char **arr, int ac)
@@ -66,8 +67,25 @@ int	init(t_box *box, char **arr, int ac)
 	box->ph = malloc(box->n_philo * sizeof(t_philo));
 	box->th = malloc(box->n_philo * sizeof(pthread_t));
 	if (!box->ph || !box->th)
-		exit ((printf(R"Error➜"E" memory allocator") * 0) + ERROR);
-	init_ph (box);
-	init_th(box);
+		return ((printf(R"Error➜"E" memory allocator") * 0)
+			+ clear_sm(&box->ph, &box->th, ERROR));
+	init_ph(box);
+	if (init_th(box) == ERROR)
+		return (clear_sm(&box->ph, &box->th, ERROR));
 	return (EXIT_SUCCESS);
+}
+
+int	clear_sm(t_philo **ph, pthread_t **th, int stt)
+{
+	if (ph && *ph)
+	{
+		free (*ph);
+		*ph = NULL;
+	}
+	if (th && *th)
+	{
+		free (*th);
+		*th = NULL;
+	}
+	return (stt);
 }

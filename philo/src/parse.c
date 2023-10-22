@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:15:50 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/20 14:20:35 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/22 10:28:07 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,15 @@ int	check_av(int ac, char **av)
 	int	check;
 
 	if (ac < 5 || ac > 6)
-		exit ((printf(R"Error➜"E" Invalid arguments\n") * 0) + ERROR);
+		return ((printf(R"Error➜"E" Invalid arguments\n") * 0) + ERROR);
 	check = is_digit(av[1]) * is_digit(av[2]) * is_digit(av[3])
 		* is_digit(av[4]);
 	if (ac == 6)
 		check = is_digit(av[1]) * is_digit(av[2]) * is_digit(av[3])
 			* is_digit(av[4]) * is_digit(av[5]);
 	if (!check)
-		exit ((printf(R"Error➜"E" Invalid arguments\n") * 0) + ERROR);
-	return (printf(C"Welcome to the black box 🗃\n"E) * TRUE);
+		return ((printf(R"Error➜"E" Invalid arguments\n") * 0) + ERROR);
+	return ((printf(C"Welcome to the black box 🗃\n"E) * 0) + TRUE);
 }
 
 int	get_arg(int ac, char **av, int check, int *array)
@@ -78,7 +78,9 @@ int	get_arg(int ac, char **av, int check, int *array)
 	int	i;
 	int	j;
 
-	if (check)
+	if (check == ERROR)
+		return (ERROR);
+	if (check == TRUE)
 	{
 		i = 0;
 		j = 1;
@@ -86,10 +88,10 @@ int	get_arg(int ac, char **av, int check, int *array)
 		{
 			array[i] = ft_atoi(av[j]);
 			if (array[0] >= 201)
-				exit (printf(R"Error➜"E" The maximum number of"\
-				" philosophers is 200\n"));
+				return ((printf(R"Error➜"E" The maximum number of"\
+				" philosophers is 200\n") * 0) + ERROR);
 			if (array[i] <= 0)
-				exit ((printf(R"Error➜"E" Do you want the box to explode?\n")
+				return ((printf(R"Error➜"E" Do you want the box to explode?\n")
 						* 0) + ERROR);
 			i++;
 			j++;
@@ -97,5 +99,5 @@ int	get_arg(int ac, char **av, int check, int *array)
 		return (TRUE);
 	}
 	else
-		exit((printf(R"Error➜"E" The box exploded\n") * 0) + ERROR);
+		return ((printf(R"Error➜"E" The box exploded\n") * 0) + ERROR);
 }

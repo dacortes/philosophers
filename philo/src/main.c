@@ -17,9 +17,10 @@ int	main(int ac, char **av)
 	t_box	box;
 	int		arr[5];
 
-	get_arg (ac, av, check_av(ac, av), arr);
-	if (init(&box, av, (ac - 1)) != 0)
-		return (1);
+	if (get_arg (ac, av, check_av(ac, av), arr) == ERROR)
+		return (ERROR);
+	if (init(&box, av, (ac - 1)) == ERROR)
+		return (ERROR);
 	tm_sleep(100, &box);
 	gettimeofday(&box.start, NULL);
 	pthread_mutex_unlock(&box.m_start);
