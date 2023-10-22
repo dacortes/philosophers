@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:18:39 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/21 11:22:35 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/22 09:38:54 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ struct s_philo
 };
 
 /* src/init.c */
-int		init(t_box *box, char **arr, int ac);
+int			init(t_box *box, char **arr, int ac);
 
 /* src/parse.c */
-int		ft_atoi(char *str);
-int		check_av(int ac, char **av);
-int		get_arg(int ac, char **av, int check, int *array);
+int			ft_atoi(char *str);
+int			check_av(int ac, char **av);
+int			get_arg(int ac, char **av, int check, int *array);
 
 /* src/routine.c */
 void		*run(void *arg);
@@ -104,9 +104,7 @@ void		supervisor(t_box *box);
 
 /* src/utils.c */
 long		time_elapsed(struct timeval start);
-void		show_stt(char *color, t_philo *ph, char *str, int stt);
-
-void		ft_end(t_box	*box);
-
+void		show_stt(t_philo *ph, char *str, int stt);
 int			tm_sleep(int millisec, t_box *box);
+void		ft_end(t_box	*box);
 #endif

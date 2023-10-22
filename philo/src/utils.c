@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:25:09 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/21 10:40:41 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/22 09:37:49 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ long	time_elapsed(struct timeval start)
 	return (pass);
 }
 
-void	show_stt(char *color, t_philo *ph, char *str, int stt)
+void	show_stt(t_philo *ph, char *str, int stt)
 {
 	int		tm;
 	int		end;
@@ -35,7 +35,7 @@ void	show_stt(char *color, t_philo *ph, char *str, int stt)
 	pthread_mutex_unlock(&ph->box->m_end);
 	tm = time_elapsed(ph->box->start);
 	if (end != 1 || stt == 1)
-		printf("%s%d %d %s\n%s", color, tm, ph->n_philo + 1, str, E);
+		printf("%d %d %s\n", tm, ph->n_philo + 1, str);
 	pthread_mutex_unlock(&ph->box->m_print);
 }
 

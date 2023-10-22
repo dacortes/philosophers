@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:13:28 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/21 11:12:03 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/22 09:38:27 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	times_eaten(t_philo *philo)
 static void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->left);
-	show_stt(G, philo, FORK, 0);
+	show_stt(philo, FORK, 0);
 	if (philo->box->n_philo == 1)
 	{
 		tm_sleep(philo->box->tm_die + 10, philo->box);
@@ -38,21 +38,21 @@ static void	eating(t_philo *philo)
 		return ;
 	}
 	pthread_mutex_lock(philo->right);
-	show_stt(G, philo, FORK, 0);
+	show_stt(philo, FORK, 0);
 	pthread_mutex_lock(&philo->m_die);
 	philo->die = time_elapsed(philo->box->start) + philo->box->tm_die;
 	pthread_mutex_unlock(&philo->m_die);
 	if (philo->eat_tm_left != 0)
-		show_stt(Y, philo, EAT, 0);
+		show_stt(philo, EAT, 0);
 	times_eaten(philo);
 	tm_sleep(philo->box->tm_eat, philo->box);
 	pthread_mutex_unlock(&philo->left);
 	pthread_mutex_unlock(philo->right);
 	if (philo->eat_tm_left != 0)
-		show_stt(B, philo, SLEEP, 0);
+		show_stt(philo, SLEEP, 0);
 	tm_sleep(philo->box->tm_dream, philo->box);
 	if (philo->eat_tm_left != 0)
-		show_stt(O, philo, THINK, 0);
+		show_stt(philo, THINK, 0);
 }
 
 void	*run(void *ph)
@@ -94,7 +94,7 @@ static int	supervisor_eat(t_box	*box)
 		pthread_mutex_lock(&box->m_end);
 		box->end = 1;
 		pthread_mutex_unlock(&box->m_end);
-		show_stt(R, &box->ph[i], "end the simulation", 1);
+		show_stt(&box->ph[i], "end the simulation", 1);
 		return (TRUE);
 	}
 	return (EXIT_SUCCESS);
@@ -116,7 +116,7 @@ void	supervisor(t_box *box)
 			pthread_mutex_lock(&box->m_end);
 			box->end = 1;
 			pthread_mutex_unlock(&box->m_end);
-			show_stt(R, &box->ph[id], DEAD, 1);
+			show_stt(&box->ph[id], DEAD, 1);
 			break ;
 		}
 		if (box->n_eat > 0 && supervisor_eat(box) == 1)
