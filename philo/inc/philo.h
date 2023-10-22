@@ -6,7 +6,7 @@
 /*   By: dacortes <dacortes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:18:39 by dacortes          #+#    #+#             */
-/*   Updated: 2023/10/22 09:38:54 by dacortes         ###   ########.fr       */
+/*   Updated: 2023/10/22 09:50:17 by dacortes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,20 @@
 # define FALSE	0
 # define TRUE	1
 /*  Status philo */
+
+/*
 # define FORK "has taken a fork"
 # define EAT "is eating"
 # define SLEEP "is sleeping"
 # define THINK "is thinking"
 # define DEAD "died"
+*/
+
+# define FORK "\033[1;32m has taken a fork \033[m"
+# define EAT "\033[1;33m is eating \033[m"
+# define SLEEP "\033[1;34m is sleeping \033[m"
+# define THINK "\033[38;5;128m is thinking \033[m"
+# define DEAD "\033[1;31m died \033[m"
 
 /*
 	arr[0] = num_ph arr[1] = tm_to_die
